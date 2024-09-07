@@ -47,7 +47,25 @@ struct To_Do_List: View {
                         HStack(spacing: 40){
                             GeometryReader{ geo in
                                
-                                
+                                if tasks.isEmpty {
+                                    ZStack{
+                                        Rectangle()
+                                            .frame(width: 310,height: 510)
+                                            .foregroundColor(.clear)
+                                            .background(
+                                                LinearGradient(colors: [.firstRed, .secondRed], startPoint: .top, endPoint: .bottom)
+                                            )
+                                            .clipShape(RoundedRectangle(cornerRadius: 40))
+                                        VStack{
+                                            
+                                            Text("Empty")
+                                                .foregroundColor(.lightRed)
+                                                .frame(width: 280, height: 400)
+                                                .font(Font.custom("Nosifer-Regular", size: 30))
+                                            
+                                        }
+                                    }
+                                } else {
                                     ZStack{
                                         Rectangle()
                                             .frame(width: 310,height: 510)
@@ -62,6 +80,8 @@ struct To_Do_List: View {
                                                 .foregroundColor(.lightRed)
                                                 .frame(width: 280, height: 400)
                                                 .font(Font.custom("Nosifer-Regular", size: 30))
+                                            
+                                            
                                             
                                             
                                         }
@@ -126,6 +146,7 @@ struct To_Do_List: View {
                                         
                                         
                                     }
+                                }
                                 
                             }
                         }

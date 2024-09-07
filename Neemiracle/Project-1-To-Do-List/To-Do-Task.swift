@@ -11,7 +11,9 @@ struct To_Do_Task: View {
     @State private var animation = false
     @State private var posY: CGFloat = 400
     @State private var posX: CGFloat = 200
-//    @State private var task = "Run 10 Km"
+    
+    @State private var showEdit = false
+    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     var task: Task
     var index : Int
@@ -64,21 +66,20 @@ struct To_Do_Task: View {
                 .shadow(color: .lightRed, radius: 3)
             VStack{
                 Text("\(task.needToDo)")
-//                Text("Run 10 km")
                     .foregroundColor(.lightRed)
                     .font(Font.custom("Nosifer-Regular", size: 20))
                     .frame(width: 300, height: 150)
                     .padding(.vertical)
                 Spacer()
-                HStack(spacing: 150){
+                HStack(spacing: 30){
                     ZStack{
                         Circle()
                             .stroke()
-                            .frame(width: 60)
+                            .frame(width: 50)
                             .foregroundColor(.lightRed)
-                        Image(systemName: "timer")
+                        Image(systemName: "arrowshape.backward")
                             .foregroundColor(.lightRed)
-                            .font(.system(size: 20))
+                            .font(.system(size: 18))
                     }
                     .onTapGesture{
                         dismiss()
@@ -87,12 +88,41 @@ struct To_Do_Task: View {
                     ZStack{
                         Circle()
                             .stroke()
-                            .frame(width: 60)
+                            .frame(width: 50)
+                            .foregroundColor(.lightRed)
+                        
+                        Image(systemName: "pencil")
+                            .foregroundColor(.lightRed)
+                            .font(.system(size: 18))
+                    }
+                    .onTapGesture{
+                        showEdit = true
+                    }
+                    ZStack{
+                        Circle()
+                            .stroke()
+                            .frame(width: 50)
+                            .foregroundColor(.lightRed)
+                        
+                        Text("X")
+                            .foregroundColor(.lightRed)
+                            .font(.system(size: 18))
+                    }
+                    .onTapGesture{
+                        context.delete(task)
+                        dismiss()
+                    }
+                    .shadow(color: .black,radius: 100)
+                    
+                    ZStack{
+                        Circle()
+                            .stroke()
+                            .frame(width: 50)
                             .foregroundColor(.lightRed)
                         
                         Image(systemName: "checkmark")
                             .foregroundColor(.lightRed)
-                            .font(.system(size: 20))
+                            .font(.system(size: 18))
                     }
                     .onTapGesture{
                         task.done = true
@@ -116,11 +146,9 @@ struct To_Do_Task: View {
             animation.toggle()
             print("task : \(index)")
         }
+        .sheet(isPresented: $showEdit) {
+            To_Do_Edit(task: task)
+        }
     }
 }
 
-
-//#Preview {
-//    To_Do_Task(task: Task(needToDo: "Run 10 km"))
-////    To_Do_Task()
-//}

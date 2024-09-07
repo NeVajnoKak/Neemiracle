@@ -42,6 +42,7 @@ struct To_Do_Done: View {
                                         .foregroundColor(.black)
                                         .shadow(color: .firstRed, radius: 20)
                                 )
+                                .font(Font.custom("Nosifer-Regular", size: 18))
                         }
 
                     }

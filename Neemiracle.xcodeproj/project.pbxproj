@@ -19,6 +19,7 @@
 		0C29E88A2C8B2BF50009820B /* To-Do-Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C29E8892C8B2BF50009820B /* To-Do-Create.swift */; };
 		0C29E88C2C8C16150009820B /* To-Do-Done.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C29E88B2C8C16150009820B /* To-Do-Done.swift */; };
 		0C29E88F2C8C23930009820B /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C29E88E2C8C23930009820B /* Router.swift */; };
+		0C29E8912C8C31EA0009820B /* To-Do-Edit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C29E8902C8C31EA0009820B /* To-Do-Edit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		0C29E8892C8B2BF50009820B /* To-Do-Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "To-Do-Create.swift"; sourceTree = "<group>"; };
 		0C29E88B2C8C16150009820B /* To-Do-Done.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "To-Do-Done.swift"; sourceTree = "<group>"; };
 		0C29E88E2C8C23930009820B /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		0C29E8902C8C31EA0009820B /* To-Do-Edit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "To-Do-Edit.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				0C29E8832C85C2AA0009820B /* To-Do-Task.swift */,
 				0C29E8892C8B2BF50009820B /* To-Do-Create.swift */,
 				0C29E88B2C8C16150009820B /* To-Do-Done.swift */,
+				0C29E8902C8C31EA0009820B /* To-Do-Edit.swift */,
 			);
 			path = "Project-1-To-Do-List";
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				0C29E86C2C83AC0D0009820B /* ContentView.swift in Sources */,
 				0C29E88C2C8C16150009820B /* To-Do-Done.swift in Sources */,
 				0C29E86A2C83AC0D0009820B /* NeemiracleApp.swift in Sources */,
+				0C29E8912C8C31EA0009820B /* To-Do-Edit.swift in Sources */,
 				0C29E87B2C83ACAC0009820B /* To-Do-List.swift in Sources */,
 				0C29E88F2C8C23930009820B /* Router.swift in Sources */,
 				0C29E8842C85C2AA0009820B /* To-Do-Task.swift in Sources */,
