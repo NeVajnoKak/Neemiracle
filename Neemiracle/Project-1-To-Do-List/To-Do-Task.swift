@@ -13,10 +13,13 @@ struct To_Do_Task: View {
     @State private var posX: CGFloat = 200
     
     @State private var showEdit = false
+    
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     var task: Task
-    var index : Int
+    var index: Int
+    @Binding var isShowingInfo: Bool
+    
     var body: some View {
         
         ZStack{
@@ -146,7 +149,7 @@ struct To_Do_Task: View {
             animation.toggle()
         }
         .sheet(isPresented: $showEdit) {
-            To_Do_Edit(task: task)
+            To_Do_Edit(task: task, showEdit: $showEdit, isShowingInfo: $isShowingInfo)
         }
     }
 }

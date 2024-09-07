@@ -118,7 +118,7 @@ struct To_Do_List: View {
                                     }
                                     .sheet(isPresented: $isShowingInfo) {
                                         if currentText != "Empty" {
-                                            To_Do_Task(task: tasks[currentPage], index: currentPage)
+                                            To_Do_Task(task: tasks[currentPage], index: currentPage, isShowingInfo: $isShowingInfo)
                                         }
                                         
                                     }
@@ -190,11 +190,6 @@ struct To_Do_List: View {
             .onAppear{
                 backgroundAnimation.toggle()
             }
-            .onChange(of: tasks) { _ in
-                        if currentPage >= tasks.count {
-                            currentPage = max(tasks.count - 1, 0) // Чтобы не выйти за пределы массива
-                        }
-                    }
             .sheet(isPresented: $createTask) {
                 To_Do_Create()
             }

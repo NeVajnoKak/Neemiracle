@@ -9,7 +9,8 @@ import SwiftUI
 
 struct To_Do_Edit: View {
     let task: Task
-    
+    @Binding var showEdit: Bool
+    @Binding var isShowingInfo: Bool
     @Environment(\.dismiss) private var dismiss
     @State private var newName = ""
     var body: some View {
@@ -54,10 +55,10 @@ struct To_Do_Edit: View {
             Button {
                 if newName != "" {
                     task.needToDo = newName
-                    dismiss()
-                } else {
-                    dismiss()
                 }
+                isShowingInfo = false
+                showEdit = false 
+                dismiss()
                 
             } label: {
                 Image(systemName: "checkmark")
