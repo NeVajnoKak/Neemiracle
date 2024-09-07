@@ -144,7 +144,6 @@ struct To_Do_Task: View {
         )
         .onAppear{
             animation.toggle()
-            print("task : \(index)")
         }
         .sheet(isPresented: $showEdit) {
             To_Do_Edit(task: task)

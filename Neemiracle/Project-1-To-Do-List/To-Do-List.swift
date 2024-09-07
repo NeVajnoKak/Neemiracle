@@ -46,8 +46,10 @@ struct To_Do_List: View {
                     ZStack{
                         HStack(spacing: 40){
                             GeometryReader{ geo in
-                               
-                                if tasks.isEmpty {
+  
+                                let currentText = tasks.isEmpty ? "Empty" : currentPage < tasks.count ? tasks[currentPage].needToDo : "Empty"
+
+                                    
                                     ZStack{
                                         Rectangle()
                                             .frame(width: 310,height: 510)
@@ -58,25 +60,7 @@ struct To_Do_List: View {
                                             .clipShape(RoundedRectangle(cornerRadius: 40))
                                         VStack{
                                             
-                                            Text("Empty")
-                                                .foregroundColor(.lightRed)
-                                                .frame(width: 280, height: 400)
-                                                .font(Font.custom("Nosifer-Regular", size: 30))
-                                            
-                                        }
-                                    }
-                                } else {
-                                    ZStack{
-                                        Rectangle()
-                                            .frame(width: 310,height: 510)
-                                            .foregroundColor(.clear)
-                                            .background(
-                                                LinearGradient(colors: [.firstRed, .secondRed], startPoint: .top, endPoint: .bottom)
-                                            )
-                                            .clipShape(RoundedRectangle(cornerRadius: 40))
-                                        VStack{
-                                            
-                                            Text("\(tasks[currentPage].needToDo)")
+                                            Text("\(currentText)")
                                                 .foregroundColor(.lightRed)
                                                 .frame(width: 280, height: 400)
                                                 .font(Font.custom("Nosifer-Regular", size: 30))
@@ -96,40 +80,47 @@ struct To_Do_List: View {
                                     }
                                     
                                     .onChange(of: geo.frame(in: .global).origin.x){
-                                        if !openCard {
-                                            currentX = geo.frame(in: .global).origin.x
-                                            
-                                            if let initialX = initialX {
-                                                if currentX > initialX {
-                                                    count -= 1
-                                                }
-                                                else if currentX < initialX {
-                                                    count += 1
-                                                }
-                                                else {
-                                                    
-                                                    if count != 0 {
-                                                        if count < 0 && currentPage > 0 {
-                                                            currentPage -= 1
-                                                        }
-                                                        else if count > 0 && currentPage < tasks.count - 1{
-                                                            currentPage += 1
-                                                        }
-                                                        count = 0
+                                        if currentText != "Empty" {
+                                            if !openCard {
+                                                currentX = geo.frame(in: .global).origin.x
+                                                
+                                                if let initialX = initialX {
+                                                    if currentX > initialX {
+                                                        count -= 1
                                                     }
-                                                    
-                                                    
+                                                    else if currentX < initialX {
+                                                        count += 1
+                                                    }
+                                                    else {
+                                                        
+                                                        if count != 0 {
+                                                            if count < 0 && currentPage > 0 {
+                                                                currentPage -= 1
+                                                            }
+                                                            else if count > 0 && currentPage < tasks.count - 1{
+                                                                currentPage += 1
+                                                            }
+                                                            count = 0
+                                                        }
+                                                        
+                                                        
+                                                    }
                                                 }
+                                                
                                             }
-                                            
                                         }
                                         
                                     }
                                     .onTapGesture {
-                                        isShowingInfo.toggle()
+                                        if currentText != "Empty" {
+                                            isShowingInfo.toggle()
+                                        }
                                     }
                                     .sheet(isPresented: $isShowingInfo) {
-                                        To_Do_Task(task: tasks[currentPage], index: currentPage)
+                                        if currentText != "Empty" {
+                                            To_Do_Task(task: tasks[currentPage], index: currentPage)
+                                        }
+                                        
                                     }
                                     .overlay(alignment:.top){
                                         Text("Achievements to reach")
@@ -138,15 +129,15 @@ struct To_Do_List: View {
                                             .font(Font.custom("Nosifer-Regular", size: 13))
                                     }
                                     .overlay(alignment: .bottomTrailing){
-                                        
-                                        Text("\(currentPage + 1)/\(tasks.count)")
-                                            .foregroundColor(.black)
-                                            .padding()
-                                            .font(Font.custom("Nosifer-Regular", size: 13))
-                                        
+                                        if currentText != "Empty" {
+                                            Text("\(currentPage + 1)/\(tasks.count)")
+                                                .foregroundColor(.black)
+                                                .padding()
+                                                .font(Font.custom("Nosifer-Regular", size: 13))
+                                        }
                                         
                                     }
-                                }
+                                    //                                }
                                 
                             }
                         }
@@ -199,6 +190,11 @@ struct To_Do_List: View {
             .onAppear{
                 backgroundAnimation.toggle()
             }
+            .onChange(of: tasks) { _ in
+                        if currentPage >= tasks.count {
+                            currentPage = max(tasks.count - 1, 0) // Чтобы не выйти за пределы массива
+                        }
+                    }
             .sheet(isPresented: $createTask) {
                 To_Do_Create()
             }

@@ -26,6 +26,7 @@ struct To_Do_Create: View {
                 .buttonStyle(.borderedProminent)
                 .padding(.vertical)
                 .disabled(task.isEmpty)
+                .tint(.lightRed)
                 .navigationTitle("Add Task")
                 .navigationBarTitleDisplayMode(.inline)
             }
