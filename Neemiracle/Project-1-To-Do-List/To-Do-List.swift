@@ -47,7 +47,7 @@ struct To_Do_List: View {
                         HStack(spacing: 40){
                             GeometryReader{ geo in
   
-                                let currentText = tasks.isEmpty ? "Empty" : currentPage < tasks.count ? tasks[currentPage].needToDo : "Empty"
+                                let currentText = tasks.isEmpty ? "Empty" : currentPage < tasks.count ? tasks[currentPage].needToDo : currentPage > 0 ? tasks[currentPage - 1].needToDo : tasks[0].needToDo
 
                                     
                                     ZStack{

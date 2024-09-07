@@ -112,6 +112,7 @@ struct To_Do_Task: View {
                             .font(.system(size: 18))
                     }
                     .onTapGesture{
+                        print(task.needToDo)
                         context.delete(task)
                         dismiss()
                     }
